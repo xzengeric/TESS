@@ -9,70 +9,175 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+const employees = [];
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
-inquirer
-    .prompt([
 
-        {
-            type: "list",
-            name: "role",
-            choices: ["Manager", "Engineer", "Intern"]
-        },
+init();
+function init() {
+    console.log("Welcome to Template Engine - Employee Summary")
+    buildTeam();
+}
+
+function buildTeam() {
+    inquirer
+        .prompt([
+            {
+                type: "list",
+                name: "role",
+                message: "What's your/your mamber's role?",
+                choices: ["Manager", "Engineer", "Intern"]
+            },
+        ]).then(val => {
+            // If the user says yes to another game, play again, otherwise quit the game
+            if (val.role === "Manager") {
+                this.role = val.role;
+                buildManager(role);
+            } else if (val.role === "Engineer") {
+                this.role = val.role;
+                buildEngineer(role);
+            } else if (val.role === "Intern") {
+                this.role = val.role;
+                buildIntern(role);
+            } else {
+                askAgain();
+            };
+        });
+};
+function askAgain() {
+    inquirer
+        .prompt([
+            {
+                type: "confirm",
+                name: "choice",
+                message: "More team member?"
+            }
+        ]).then(val => {
+            // If the user says yes to another game, play again, otherwise quit the game
+            if (val.choice) {
+                buildTeam();
+            } else {
+                done();
+            };
+        });
+};
+
+function buildManager(role) {
+
+    inquirer.prompt([
         {
             type: "input",
             name: "name",
             message: " Please enter your name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: " Please enter your ID?"
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: " Please enter the officeNumber?"
         }
-    ]).then( val => {
-        var name = val.name;
-        var role = val.choices;
+    ]).then(val => {
+        this.name = val.name;
+        this.id = val.id;
+        this.officeName = val.officeNumber;
+        employees.push({
+            'name': name,
+            'id': id,
+            'role': role,
+            'officeName': officeName,
+        });
+        askAgain();
 
-        render(role,name,employees);
     });
+};
 
-    const employees=[
+function buildEngineer(role) {
+
+    inquirer.prompt([
         {
-            name: "Mike A",
-            id: 1,
-            role:"",
-            officeNumber: 9527,
-            email: "mikea@fakemail.com",
-            github: "mikeaaaaa",
-            school: "UW-MBA"
-
+            type: "input",
+            name: "name",
+            message: " Please enter your name?"
         },
         {
-            name: "Jon B",
-            id: 2,
-            role:"Engineer",
-            officeNumber: 3546,
-            email: "jonb@fakemail.com",
-            github: "jonbasda",
-            school: "UW-CS"
-
+            type: "input",
+            name: "id",
+            message: " Please enter your ID?"
         },
         {
-            name: "Future Star",
-            id: 3,
-            role:"intern",
-            officeNumber: 9999,
-            email: "futurestar@fakemail.com",
-            github: "futurestarworld",
-            school: "UW"
+            type: "input",
+            name: "github",
+            message: " Please enter your github username?"
+        }
+    ]).then(val => {
+        this.name = val.name;
+        this.id = val.id;
 
+        this.github = val.github;
+        employees.push({
+            'name': name,
+            'id': id,
+            'role': role,
+            'github': github,
+        });
+        askAgain();
+
+    });
+};
+
+function buildIntern(role) {
+
+    inquirer.prompt([
+        {
+            type: "input",
+            name: "name",
+            message: " Please enter your name?"
         },
-    ];
+        {
+            type: "input",
+            name: "id",
+            message: " Please enter your ID?"
+        },
+        {
+            type: "input",
+            name: "school",
+            message: " Please enter your school?"
+        }
+    ]).then(val => {
+        this.name = val.name;
+        this.id = val.id;
+        this.school = val.school;
+        employees.push({
+            'name': name,
+            'id': id,
+            'role': role,
+            'school': school,
+        });
+        askAgain();
 
-          
+    });
+};
 
-         
-   
-    
-    
-    
-    
+
+function done() {
+    console.log(employees);
+    render(employees);
+};
+
+
+
+
+
+
+
+
+
+
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
 // generate and return a block of HTML including templated divs for each employee!
