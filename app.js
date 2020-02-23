@@ -84,12 +84,12 @@ function buildManager(role) {
     ]).then(val => {
         this.name = val.name;
         this.id = val.id;
-        this.officeName = val.officeNumber;
+        this.officeNumber = val.officeNumber;
         employees.push({
             'name': name,
             'id': id,
             'role': role,
-            'officeName': officeName,
+            'officeNumber': officeNumber,
         });
         askAgain();
 
