@@ -78,6 +78,11 @@ function buildManager(role) {
         },
         {
             type: "input",
+            name: "email",
+            message: " Please enter your email?"
+        },
+        {
+            type: "input",
             name: "officeNumber",
             message: " Please enter the officeNumber?"
         }
@@ -108,6 +113,11 @@ function buildEngineer(role) {
             type: "input",
             name: "id",
             message: " Please enter your ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: " Please enter your email?"
         },
         {
             type: "input",
@@ -142,6 +152,11 @@ function buildIntern(role) {
             type: "input",
             name: "id",
             message: " Please enter your ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: " Please enter your email?"
         },
         {
             type: "input",
