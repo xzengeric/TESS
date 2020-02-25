@@ -89,12 +89,14 @@ function buildManager(role) {
     ]).then(val => {
         this.name = val.name;
         this.id = val.id;
+        this.email=val.email;
         this.officeNumber = val.officeNumber;
         employees.push({
             'name': name,
             'id': id,
             'role': role,
-            'officeNumber': officeNumber,
+            'email':email,
+            'officeNumber': officeNumber
         });
         askAgain();
 
@@ -127,13 +129,14 @@ function buildEngineer(role) {
     ]).then(val => {
         this.name = val.name;
         this.id = val.id;
-
+        this.officeNumber = val.officeNumber;
         this.github = val.github;
         employees.push({
             'name': name,
             'id': id,
             'role': role,
             'github': github,
+            'email':email
         });
         askAgain();
 
@@ -167,11 +170,13 @@ function buildIntern(role) {
         this.name = val.name;
         this.id = val.id;
         this.school = val.school;
+        this.email = val.email;
         employees.push({
             'name': name,
             'id': id,
             'role': role,
             'school': school,
+            'email':email
         });
         askAgain();
 
